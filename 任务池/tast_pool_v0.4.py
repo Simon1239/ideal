@@ -1,5 +1,9 @@
 # coding:utf-8
 
+"""
+确保元组中的前面的项目始终具有可比性并且在一起时是唯一的。
+"""
+
 import heapq
 import threading
 import time
@@ -79,7 +83,7 @@ class TaskPool:
         """
         try:
             with self.lock:
-                heapq.heappush(self.tasks, (self._get_priority_score(task), task))
+                heapq.heappush(self.tasks, (self._get_priority_score(task) ,task))
                 self._save_tasks()
         except Exception as e:
             logging.error(f"Error adding task: {e}")
@@ -97,7 +101,8 @@ class TaskPool:
             return task
 
     def complete_task(self, task):
-        task.complete()
+        if task is not None:
+            task.complete()
 
     def _get_priority_score(self, task):
         if self.algorithm:
@@ -135,4 +140,4 @@ if __name__ == "__main__":
     task_pool.complete_task(assigned_task1)
 
     # 显示任务状态
-    task_pool.display_tasks()
+    # task_pool.display_tasks()

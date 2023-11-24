@@ -65,7 +65,7 @@ class TaskPool:
         self.storage_file = storage_file
         self.cleanup_interval = 3600 # 清理间隔，单位秒
         self.last_cleanup_time = time.time()
-        self._load_tasks()
+        # self._load_tasks()
 
     def _load_tasks(self):
         try:
